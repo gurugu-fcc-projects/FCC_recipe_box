@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import AppBar from 'material-ui/AppBar';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {
+  Card, 
+  CardHeader,
+} from 'material-ui/Card';
 
 import '../styles/App.css';
 
@@ -16,13 +19,14 @@ class App extends Component {
         <Card>
           <Card><CardHeader
             title="Fruit Pie"
+            titleStyle={{padding: 0}}
             actAsExpander={true}
             showExpandableButton={true}/></Card>
           <Card><CardHeader
             title="Steamed Veggies"
             actAsExpander={true}
             showExpandableButton={true}/></Card>
-          <Card><CardHeader 
+          <Card><CardHeader
             title="Mashed Potatoes"
             actAsExpander={true}
             showExpandableButton={true}/></Card>

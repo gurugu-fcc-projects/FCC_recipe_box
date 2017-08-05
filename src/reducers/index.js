@@ -1,4 +1,16 @@
-const init_state = {};
+const init_state = {
+  presetRecipes: [
+    {
+      name: 'Fruit Pie',
+    },
+    {
+      name: 'Steamed Veggies',
+    },
+    {
+      name: 'Mashed Potatoes',
+    },
+  ],
+};
 
 const recipeBoxApp = (state = init_state, action) => {
   switch(action.type) {
