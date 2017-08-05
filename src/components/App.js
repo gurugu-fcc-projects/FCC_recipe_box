@@ -36,7 +36,7 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  recipes: state.presetRecipes,
+  recipes: state.recipes,
 });
 
 export default connect(mapStateToProps)(App);

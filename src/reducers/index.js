@@ -1,5 +1,5 @@
 const init_state = {
-  presetRecipes: [
+  recipes: [
     {
       name: 'Fruit Pie',
     },
