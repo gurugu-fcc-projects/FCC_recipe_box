@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AppBar from 'material-ui/AppBar';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
 import '../styles/App.css';
 
@@ -12,6 +13,20 @@ class App extends Component {
           showMenuIconButton={false}
           style={{backgroundColor: '#F06292'}}
         />
+        <Card>
+          <Card><CardHeader
+            title="Fruit Pie"
+            actAsExpander={true}
+            showExpandableButton={true}/></Card>
+          <Card><CardHeader
+            title="Steamed Veggies"
+            actAsExpander={true}
+            showExpandableButton={true}/></Card>
+          <Card><CardHeader 
+            title="Mashed Potatoes"
+            actAsExpander={true}
+            showExpandableButton={true}/></Card>
+        </Card>
       </div>
     );
   }
