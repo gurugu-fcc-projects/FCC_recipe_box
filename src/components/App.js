@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
+import RaisedButton from 'material-ui/RaisedButton';
+
 import '../styles/App.css';
+import logo from '../logo.svg';
 
 class App extends Component {
   render() {
@@ -13,6 +15,7 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+        <RaisedButton label="Default" />
       </div>
     );
   }
