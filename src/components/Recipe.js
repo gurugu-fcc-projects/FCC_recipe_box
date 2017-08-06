@@ -17,18 +17,12 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 import RaisedButton from 'material-ui/RaisedButton';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
 
 const Recipe = (props) => {
   const {
     recipe,
-    deleteWindowIsOpen,
-    editWindowIsOpen,
     openDeleteWindow,
-    closeDeleteWindow,
     openEditWindow,
-    closeEditWindow,
   } = props;
 
   const styles = {
@@ -41,31 +35,8 @@ const Recipe = (props) => {
     },
   };
 
-  const actions = [
-    <FlatButton
-      label="Cancel"
-      primary={true}
-      onTouchTap={closeDeleteWindow}
-    />,
-    <FlatButton
-      label="Delete"
-      secondary={true}
-      keyboardFocused={true}
-      onTouchTap={closeDeleteWindow}
-    />,
-  ];
-
   return (
     <Card>
-
-      <Dialog
-        title="Delete recipe"
-        actions={actions}
-        modal={false}
-        open={deleteWindowIsOpen}
-        onRequestClose={closeDeleteWindow}>
-        Are you sure you want to delete this recipe?
-      </Dialog>
 
       <CardHeader
         title={recipe.name}
@@ -87,6 +58,7 @@ const Recipe = (props) => {
         </Table>
         <RaisedButton
           label="Edit"
+          onTouchTap={openEditWindow}
           style={styles.raisedButton} />
         <RaisedButton
           label="Delete"
@@ -100,17 +72,8 @@ const Recipe = (props) => {
 
 Recipe.propTypes = {
   recipe: PropTypes.object.isRequired,
-  deleteWindowIsOpen: PropTypes.bool,
-  editWindowIsOpen: PropTypes.bool,
   openDeleteWindow: PropTypes.func,
-  closeDeleteWindow: PropTypes.func,
   openEditWindow: PropTypes.func,
-  closeEditWindow: PropTypes.func,
 };
 
-const mapStateToProps = (state) => ({
-  deleteWindowIsOpen: state.deleteWindowIsOpen,
-  editWindowIsOpen: state.editWindowIsOpen,
-});
-
-export default connect(mapStateToProps, actions)(Recipe);
+export default connect(null, actions)(Recipe);

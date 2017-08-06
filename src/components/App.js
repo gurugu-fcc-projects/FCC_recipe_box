@@ -17,7 +17,10 @@ class App extends Component {
   render() {
     const {
       recipes,
+      deleteWindowIsOpen,
       addWindowIsOpen,
+      openDeleteWindow,
+      closeDeleteWindow,
       openAddWindow,
       closeAddWindow,
     } = this.props;
@@ -26,7 +29,7 @@ class App extends Component {
       <Recipe key={index} recipe={recipe} />
     );
 
-    const actions = [
+    const addWindowActions = [
       <FlatButton
         label="Cancel"
         primary={true}
@@ -37,6 +40,20 @@ class App extends Component {
         label="Add"
         secondary={true}
         onTouchTap={closeAddWindow}
+      />,
+    ];
+
+    const deleteWindowActions = [
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        onTouchTap={closeDeleteWindow}
+      />,
+      <FlatButton
+        label="Delete"
+        secondary={true}
+        keyboardFocused={true}
+        onTouchTap={closeDeleteWindow}
       />,
     ];
 
@@ -70,12 +87,22 @@ class App extends Component {
 
         <Dialog
           title="Add recipe"
-          actions={actions}
+          actions={addWindowActions}
           modal={false}
           open={addWindowIsOpen}
           onRequestClose={closeAddWindow}>
           Please state recipe name and add the ingredients:
         </Dialog>
+
+        <Dialog
+          title="Delete recipe"
+          actions={deleteWindowActions}
+          modal={false}
+          open={deleteWindowIsOpen}
+          onRequestClose={closeDeleteWindow}>
+          Are you sure you want to delete this recipe?
+        </Dialog>
+
 
       </div>
     );
@@ -85,12 +112,16 @@ class App extends Component {
 App.propTypes = {
   recipes: PropTypes.array.isRequired,
   addWindowIsOpen: PropTypes.bool,
+  deleteWindowIsOpen: PropTypes.bool,
+  openDeleteWindow: PropTypes.func,
+  closeDeleteWindow: PropTypes.func,
   openAddWindow: PropTypes.func,
   closeAddWindow: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
   recipes: state.recipes,
+  deleteWindowIsOpen: state.deleteWindowIsOpen,
   addWindowIsOpen: state.addWindowIsOpen,
 });
 
