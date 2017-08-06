@@ -23,3 +23,15 @@ export const closeEditWindow = () => {
     type: types.CLOSE_EDIT_WINDOW,
   };
 };
+
+export const openAddWindow = () => {
+  return {
+    type: types.OPEN_ADD_WINDOW,
+  };
+};
+
+export const closeAddWindow = () => {
+  return {
+    type: types.CLOSE_ADD_WINDOW,
+  };
+};

@@ -85,7 +85,9 @@ const Recipe = (props) => {
             )}
           </TableBody>
         </Table>
-        <RaisedButton label="Edit" style={styles.raisedButton} />
+        <RaisedButton
+          label="Edit"
+          style={styles.raisedButton} />
         <RaisedButton
           label="Delete"
           secondary={true}
