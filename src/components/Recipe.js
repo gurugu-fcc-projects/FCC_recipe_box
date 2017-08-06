@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import * as actions from '../actions';
 
 import {
   Card,
@@ -21,8 +24,11 @@ const Recipe = (props) => {
   const {
     recipe,
     deleteWindowIsOpen,
+    editWindowIsOpen,
     openDeleteWindow,
     closeDeleteWindow,
+    openEditWindow,
+    closeEditWindow,
   } = props;
 
   const styles = {
@@ -90,4 +96,19 @@ const Recipe = (props) => {
   );
 };
 
-export default Recipe;
+Recipe.propTypes = {
+  recipe: PropTypes.object.isRequired,
+  deleteWindowIsOpen: PropTypes.bool,
+  editWindowIsOpen: PropTypes.bool,
+  openDeleteWindow: PropTypes.func,
+  closeDeleteWindow: PropTypes.func,
+  openEditWindow: PropTypes.func,
+  closeEditWindow: PropTypes.func,
+};
+
+const mapStateToProps = (state) => ({
+  deleteWindowIsOpen: state.deleteWindowIsOpen,
+  editWindowIsOpen: state.editWindowIsOpen,
+});
+
+export default connect(mapStateToProps, actions)(Recipe);

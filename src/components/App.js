@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import AppBar from 'material-ui/AppBar';
 import { Card } from 'material-ui/Card';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import '../styles/App.css';
 import * as actions from '../actions';
@@ -11,22 +13,19 @@ import Recipe from './Recipe';
 
 class App extends Component {
   render() {
-    const {
-      recipes,
-      deleteWindowIsOpen,
-      openDeleteWindow,
-      closeDeleteWindow,
-    } = this.props;
+    const { recipes } = this.props;
 
     const renderedRecipes = recipes.map((recipe, index) =>
-      <Recipe
-        key={index}
-        recipe={recipe}
-        deleteWindowIsOpen={deleteWindowIsOpen}
-        openDeleteWindow={openDeleteWindow}
-        closeDeleteWindow={closeDeleteWindow}
-      />
+      <Recipe key={index} recipe={recipe} />
     );
+
+    const styles = {
+      addButton: {
+        position: 'absolute',
+        bottom: 10,
+        right: 10,
+      },
+    };
 
     return (
       <div className="App">
@@ -38,6 +37,9 @@ class App extends Component {
         <Card>
           {renderedRecipes}
         </Card>
+        <FloatingActionButton secondary={true} style={styles.addButton}>
+          <ContentAdd />
+        </FloatingActionButton>
       </div>
     );
   }
@@ -45,14 +47,10 @@ class App extends Component {
 
 App.propTypes = {
   recipes: PropTypes.array.isRequired,
-  deleteWindowIsOpen: PropTypes.bool,
-  openDeleteWindow: PropTypes.func,
-  closeDeleteWindow: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
   recipes: state.recipes,
-  deleteWindowIsOpen: state.deleteWindowIsOpen,
 });
 
 export default connect(mapStateToProps, actions)(App);

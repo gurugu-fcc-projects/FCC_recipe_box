@@ -2,6 +2,7 @@ import * as types from '../constants/ActionTypes';
 
 const init_state = {
   deleteWindowIsOpen: false,
+  editWindowIsOpen: false,
   recipes: [
     {
       name: 'Fruit Pie',
@@ -29,6 +30,16 @@ const recipeBoxApp = (state = init_state, action) => {
       return {
         ...state,
         deleteWindowIsOpen: false,
+      };
+    case types.OPEN_EDIT_WINDOW:
+      return {
+        ...state,
+        editWindowIsOpen: true,
+      };
+    case types.CLOSE_EDIT_WINDOW:
+      return {
+        ...state,
+        editWindowIsOpen: false,
       };
     default:
       return state;
