@@ -1,37 +1,47 @@
 import * as types from '../constants/ActionTypes';
 
-export const openDeleteWindow = () => {
+export const openDeleteDialog = () => {
   return {
-    type: types.OPEN_DELETE_WINDOW,
+    type: types.OPEN_DELETE_DIALOG,
   };
 };
 
-export const closeDeleteWindow = () => {
+export const closeDeleteDialog = () => {
   return {
-    type: types.CLOSE_DELETE_WINDOW,
+    type: types.CLOSE_DELETE_DIALOG,
   };
 };
 
-export const openEditWindow = () => {
+export const openEditDialog = () => {
   return {
-    type: types.OPEN_EDIT_WINDOW,
+    type: types.OPEN_EDIT_DIALOG,
   };
 };
 
-export const closeEditWindow = () => {
+export const closeEditDialog = () => {
   return {
-    type: types.CLOSE_EDIT_WINDOW,
+    type: types.CLOSE_EDIT_DIALOG,
   };
 };
 
-export const openAddWindow = () => {
+export const openAddDialog = () => {
   return {
-    type: types.OPEN_ADD_WINDOW,
+    type: types.OPEN_ADD_DIALOG,
   };
 };
 
-export const closeAddWindow = () => {
+export const closeAddDialog = () => {
   return {
-    type: types.CLOSE_ADD_WINDOW,
+    type: types.CLOSE_ADD_DIALOG,
+  };
+};
+
+export const inputRecipe = (name, id) => {
+  return {
+    type: types.INPUT_RECIPE,
+    payload: {
+      value: name,
+      field: id,
+    },
   };
 };

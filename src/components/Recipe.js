@@ -72,8 +72,8 @@ const Recipe = (props) => {
 
 Recipe.propTypes = {
   recipe: PropTypes.object.isRequired,
-  openDeleteWindow: PropTypes.func,
-  openEditWindow: PropTypes.func,
+  openDeleteDialog: PropTypes.func,
+  openEditDialog: PropTypes.func,
 };
 
 export default connect(null, actions)(Recipe);

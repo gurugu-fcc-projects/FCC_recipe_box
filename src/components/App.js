@@ -8,6 +8,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
 
 import '../styles/App.css';
 import * as actions from '../actions';
@@ -17,43 +18,45 @@ class App extends Component {
   render() {
     const {
       recipes,
-      deleteWindowIsOpen,
-      addWindowIsOpen,
-      openDeleteWindow,
-      closeDeleteWindow,
-      openAddWindow,
-      closeAddWindow,
+      deleteDialogIsOpen,
+      addDialogIsOpen,
+      dialogRecipeName,
+      dialogIngredients,
+      closeDeleteDialog,
+      openAddDialog,
+      closeAddDialog,
+      inputRecipe,
     } = this.props;
 
     const renderedRecipes = recipes.map((recipe, index) =>
       <Recipe key={index} recipe={recipe} />
     );
 
-    const addWindowActions = [
+    const addDialogActions = [
       <FlatButton
         label="Cancel"
         primary={true}
         keyboardFocused={true}
-        onTouchTap={closeAddWindow}
+        onTouchTap={closeAddDialog}
       />,
       <FlatButton
         label="Add"
         secondary={true}
-        onTouchTap={closeAddWindow}
+        onTouchTap={closeAddDialog}
       />,
     ];
 
-    const deleteWindowActions = [
+    const deleteDialogActions = [
       <FlatButton
         label="Cancel"
         primary={true}
-        onTouchTap={closeDeleteWindow}
+        onTouchTap={closeDeleteDialog}
       />,
       <FlatButton
         label="Delete"
         secondary={true}
         keyboardFocused={true}
-        onTouchTap={closeDeleteWindow}
+        onTouchTap={closeDeleteDialog}
       />,
     ];
 
@@ -63,6 +66,10 @@ class App extends Component {
         bottom: 10,
         right: 10,
       },
+    };
+
+    const handleInput = (event) => {
+      inputRecipe(event.target.value, event.target.id);
     };
 
     return (
@@ -81,28 +88,47 @@ class App extends Component {
         <FloatingActionButton
           secondary={true}
           style={styles.addButton}
-          onTouchTap={openAddWindow}>
+          onTouchTap={openAddDialog}>
           <ContentAdd />
         </FloatingActionButton>
 
         <Dialog
           title="Add recipe"
-          actions={addWindowActions}
+          actions={addDialogActions}
           modal={false}
-          open={addWindowIsOpen}
-          onRequestClose={closeAddWindow}>
-          Please state recipe name and add the ingredients:
+          open={addDialogIsOpen}
+          onRequestClose={closeAddDialog}>
+          <TextField
+            id="dialogRecipeName"
+            hintText="Enter a recipe name here"
+            floatingLabelText="Recipe Name"
+            floatingLabelFixed={true}
+            errorText="This field is required"
+            fullWidth={true}
+            value={dialogRecipeName}
+            onChange={handleInput}
+          /><br />
+          <TextField
+            id="dialogIngredients"
+            hintText="Enter ingredients divided by coma"
+            floatingLabelText="Ingredients"
+            floatingLabelFixed={true}
+            errorText=""
+            multiLine={true}
+            fullWidth={true}
+            value={dialogIngredients}
+            onChange={handleInput}
+          /><br />
         </Dialog>
 
         <Dialog
           title="Delete recipe"
-          actions={deleteWindowActions}
+          actions={deleteDialogActions}
           modal={false}
-          open={deleteWindowIsOpen}
-          onRequestClose={closeDeleteWindow}>
+          open={deleteDialogIsOpen}
+          onRequestClose={closeDeleteDialog}>
           Are you sure you want to delete this recipe?
         </Dialog>
-
 
       </div>
     );
@@ -111,18 +137,23 @@ class App extends Component {
 
 App.propTypes = {
   recipes: PropTypes.array.isRequired,
-  addWindowIsOpen: PropTypes.bool,
-  deleteWindowIsOpen: PropTypes.bool,
-  openDeleteWindow: PropTypes.func,
-  closeDeleteWindow: PropTypes.func,
-  openAddWindow: PropTypes.func,
-  closeAddWindow: PropTypes.func,
+  deleteDialogIsOpen: PropTypes.bool,
+  addDialogIsOpen: PropTypes.bool,
+  dialogRecipeName: PropTypes.string,
+  dialogIngredients: PropTypes.string,
+  openDeleteDialog: PropTypes.func,
+  closeDeleteDialog: PropTypes.func,
+  openAddDialog: PropTypes.func,
+  closeAddDialog: PropTypes.func,
+  inputRecipe: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
   recipes: state.recipes,
-  deleteWindowIsOpen: state.deleteWindowIsOpen,
-  addWindowIsOpen: state.addWindowIsOpen,
+  deleteDialogIsOpen: state.dialogs.deleteDialogIsOpen,
+  addDialogIsOpen: state.dialogs.addDialogIsOpen,
+  dialogRecipeName: state.input.dialogRecipeName,
+  dialogIngredients: state.input.dialogIngredients,
 });
 
 export default connect(mapStateToProps, actions)(App);
