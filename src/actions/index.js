@@ -45,3 +45,13 @@ export const inputRecipe = (name, id) => {
     },
   };
 };
+
+export const addRecipe = (name, ingredients) => {
+  return {
+    type: types.ADD_RECIPE,
+    payload: {
+      name,
+      ingredients,
+    },
+  };
+};

@@ -6,7 +6,7 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 
-import { closeAddDialog, inputRecipe } from '../actions';
+import { closeAddDialog, inputRecipe, addRecipe } from '../actions';
 
 const AddDialog = ({
   addDialogIsOpen,
@@ -14,7 +14,21 @@ const AddDialog = ({
   dialogIngredients,
   closeAddDialog,
   inputRecipe,
+  addRecipe,
 }) => {
+  const handleInput = (event) => {
+    inputRecipe(event.target.value, event.target.id);
+  };
+
+  const handleAdd = () => {
+    const ingredients = (dialogIngredients.split(',')).map(ingredient => {
+      return ingredient.trim();
+    });
+    // const readyIngredients = ingredientsArray
+    console.log(ingredients);
+    addRecipe(dialogRecipeName, ingredients);
+  };
+
   const addDialogActions = [
     <FlatButton
       label="Cancel"
@@ -25,13 +39,12 @@ const AddDialog = ({
     <FlatButton
       label="Add"
       secondary={true}
-      onTouchTap={closeAddDialog}
+      onTouchTap={handleAdd}
     />,
   ];
 
-  const handleInput = (event) => {
-    inputRecipe(event.target.value, event.target.id);
-  };
+  const inputNameError = dialogRecipeName ? '' : 'This field is required';
+  const inputIngredientsError = dialogIngredients ? '' : 'This field is required';
 
   return (
     <Dialog
@@ -45,7 +58,7 @@ const AddDialog = ({
         hintText="Enter a recipe name here"
         floatingLabelText="Recipe Name"
         floatingLabelFixed={true}
-        errorText="This field is required"
+        errorText={inputNameError}
         fullWidth={true}
         value={dialogRecipeName}
         onChange={handleInput}
@@ -55,7 +68,7 @@ const AddDialog = ({
         hintText="Enter ingredients divided by coma"
         floatingLabelText="Ingredients"
         floatingLabelFixed={true}
-        errorText=""
+        errorText={inputIngredientsError}
         multiLine={true}
         fullWidth={true}
         value={dialogIngredients}
@@ -79,4 +92,8 @@ const mapStateToProps = (state) => ({
   dialogIngredients: state.input.dialogIngredients,
 });
 
-export default connect(mapStateToProps, { closeAddDialog, inputRecipe })(AddDialog);
+export default connect(mapStateToProps, {
+  closeAddDialog,
+  inputRecipe,
+  addRecipe
+})(AddDialog);

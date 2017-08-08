@@ -1,3 +1,7 @@
+import {
+  ADD_RECIPE,
+} from '../constants/ActionTypes';
+
 const initial_state = [
   {
     name: 'Fruit Pie',
@@ -15,6 +19,14 @@ const initial_state = [
 
 const recipeList = (state = initial_state, action) => {
   switch (action.type) {
+    case ADD_RECIPE:
+      return [
+        ...state,
+        {
+          name: action.payload.name,
+          ingredients: action.payload.ingredients,
+        }
+      ];
     default:
       return state;
   }

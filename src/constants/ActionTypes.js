@@ -6,3 +6,4 @@ export const OPEN_ADD_DIALOG = 'OPEN_ADD_DIALOG';
 export const CLOSE_ADD_DIALOG = 'CLOSE_ADD_DIALOG';
 
 export const INPUT_RECIPE = 'INPUT_RECIPE';
+export const ADD_RECIPE = 'ADD_RECIPE';
