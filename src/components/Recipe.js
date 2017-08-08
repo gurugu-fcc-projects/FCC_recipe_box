@@ -1,7 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import * as actions from '../actions';
+import { connect } from 'react-redux';
+import { openDeleteDialog, openEditDialog } from '../actions';
 
 import {
   Card,
@@ -76,4 +76,4 @@ Recipe.propTypes = {
   openEditDialog: PropTypes.func,
 };
 
-export default connect(null, actions)(Recipe);
+export default connect(null, { openDeleteDialog, openEditDialog })(Recipe);

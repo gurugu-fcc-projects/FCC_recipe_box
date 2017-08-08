@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import AppBar from 'material-ui/AppBar';
 import { Card } from 'material-ui/Card';
@@ -13,38 +13,20 @@ import TextField from 'material-ui/TextField';
 import '../styles/App.css';
 import * as actions from '../actions';
 import Recipe from './Recipe';
+import AddDialog from './AddDialog';
 
 class App extends Component {
   render() {
     const {
       recipes,
       deleteDialogIsOpen,
-      addDialogIsOpen,
-      dialogRecipeName,
-      dialogIngredients,
       closeDeleteDialog,
       openAddDialog,
-      closeAddDialog,
-      inputRecipe,
     } = this.props;
 
     const renderedRecipes = recipes.map((recipe, index) =>
       <Recipe key={index} recipe={recipe} />
     );
-
-    const addDialogActions = [
-      <FlatButton
-        label="Cancel"
-        primary={true}
-        keyboardFocused={true}
-        onTouchTap={closeAddDialog}
-      />,
-      <FlatButton
-        label="Add"
-        secondary={true}
-        onTouchTap={closeAddDialog}
-      />,
-    ];
 
     const deleteDialogActions = [
       <FlatButton
@@ -68,10 +50,6 @@ class App extends Component {
       },
     };
 
-    const handleInput = (event) => {
-      inputRecipe(event.target.value, event.target.id);
-    };
-
     return (
       <div className="App">
 
@@ -92,34 +70,7 @@ class App extends Component {
           <ContentAdd />
         </FloatingActionButton>
 
-        <Dialog
-          title="Add recipe"
-          actions={addDialogActions}
-          modal={false}
-          open={addDialogIsOpen}
-          onRequestClose={closeAddDialog}>
-          <TextField
-            id="dialogRecipeName"
-            hintText="Enter a recipe name here"
-            floatingLabelText="Recipe Name"
-            floatingLabelFixed={true}
-            errorText="This field is required"
-            fullWidth={true}
-            value={dialogRecipeName}
-            onChange={handleInput}
-          /><br />
-          <TextField
-            id="dialogIngredients"
-            hintText="Enter ingredients divided by coma"
-            floatingLabelText="Ingredients"
-            floatingLabelFixed={true}
-            errorText=""
-            multiLine={true}
-            fullWidth={true}
-            value={dialogIngredients}
-            onChange={handleInput}
-          /><br />
-        </Dialog>
+        <AddDialog />
 
         <Dialog
           title="Delete recipe"
@@ -138,22 +89,15 @@ class App extends Component {
 App.propTypes = {
   recipes: PropTypes.array.isRequired,
   deleteDialogIsOpen: PropTypes.bool,
-  addDialogIsOpen: PropTypes.bool,
-  dialogRecipeName: PropTypes.string,
-  dialogIngredients: PropTypes.string,
   openDeleteDialog: PropTypes.func,
   closeDeleteDialog: PropTypes.func,
   openAddDialog: PropTypes.func,
   closeAddDialog: PropTypes.func,
-  inputRecipe: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
   recipes: state.recipes,
   deleteDialogIsOpen: state.dialogs.deleteDialogIsOpen,
-  addDialogIsOpen: state.dialogs.addDialogIsOpen,
-  dialogRecipeName: state.input.dialogRecipeName,
-  dialogIngredients: state.input.dialogIngredients,
 });
 
 export default connect(mapStateToProps, actions)(App);
