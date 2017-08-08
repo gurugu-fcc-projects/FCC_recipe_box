@@ -20,8 +20,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 const Recipe = ({
   recipe,
-  openDeleteWindow,
-  openEditWindow,
+  openDeleteDialog,
+  openEditDialog,
 }) => {
   const styles = {
     subheader: {
@@ -56,12 +56,12 @@ const Recipe = ({
         </Table>
         <RaisedButton
           label="Edit"
-          onTouchTap={openEditWindow}
+          onTouchTap={openEditDialog}
           style={styles.raisedButton} />
         <RaisedButton
           label="Delete"
           secondary={true}
-          onTouchTap={openDeleteWindow}
+          onTouchTap={openDeleteDialog}
           style={styles.raisedButton} />
       </CardText>
     </Card>

@@ -11,93 +11,59 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 
 import '../styles/App.css';
-import * as actions from '../actions';
+import { openAddDialog } from '../actions';
 import Recipe from './Recipe';
 import AddDialog from './AddDialog';
+import DeleteDialog from './DeleteDialog';
 
-class App extends Component {
-  render() {
-    const {
-      recipes,
-      deleteDialogIsOpen,
-      closeDeleteDialog,
-      openAddDialog,
-    } = this.props;
+const App = ({
+  recipes,
+  openAddDialog
+}) => {
+  const renderedRecipes = recipes.map((recipe, index) =>
+    <Recipe key={index} recipe={recipe} />
+  );
 
-    const renderedRecipes = recipes.map((recipe, index) =>
-      <Recipe key={index} recipe={recipe} />
-    );
+  const styles = {
+    addButton: {
+      position: 'absolute',
+      bottom: 10,
+      right: 10,
+    },
+  };
 
-    const deleteDialogActions = [
-      <FlatButton
-        label="Cancel"
-        primary={true}
-        onTouchTap={closeDeleteDialog}
-      />,
-      <FlatButton
-        label="Delete"
+  return (
+    <div className="App">
+
+      <AppBar
+        title="Recipe Box"
+        showMenuIconButton={false}
+        style={{backgroundColor: '#F06292'}}
+      />
+
+      <Card>{renderedRecipes}</Card>
+
+      <FloatingActionButton
         secondary={true}
-        keyboardFocused={true}
-        onTouchTap={closeDeleteDialog}
-      />,
-    ];
+        style={styles.addButton}
+        onTouchTap={openAddDialog}>
+        <ContentAdd />
+      </FloatingActionButton>
 
-    const styles = {
-      addButton: {
-        position: 'absolute',
-        bottom: 10,
-        right: 10,
-      },
-    };
+      <AddDialog />
+      <DeleteDialog />
 
-    return (
-      <div className="App">
-
-        <AppBar
-          title="Recipe Box"
-          showMenuIconButton={false}
-          style={{backgroundColor: '#F06292'}}
-        />
-
-        <Card>
-          {renderedRecipes}
-        </Card>
-
-        <FloatingActionButton
-          secondary={true}
-          style={styles.addButton}
-          onTouchTap={openAddDialog}>
-          <ContentAdd />
-        </FloatingActionButton>
-
-        <AddDialog />
-
-        <Dialog
-          title="Delete recipe"
-          actions={deleteDialogActions}
-          modal={false}
-          open={deleteDialogIsOpen}
-          onRequestClose={closeDeleteDialog}>
-          Are you sure you want to delete this recipe?
-        </Dialog>
-
-      </div>
-    );
-  }
+    </div>
+  );
 }
 
 App.propTypes = {
   recipes: PropTypes.array.isRequired,
-  deleteDialogIsOpen: PropTypes.bool,
-  openDeleteDialog: PropTypes.func,
-  closeDeleteDialog: PropTypes.func,
   openAddDialog: PropTypes.func,
-  closeAddDialog: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
   recipes: state.recipes,
-  deleteDialogIsOpen: state.dialogs.deleteDialogIsOpen,
 });
 
-export default connect(mapStateToProps, actions)(App);
+export default connect(mapStateToProps, { openAddDialog })(App);
