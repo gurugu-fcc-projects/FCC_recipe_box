@@ -18,13 +18,11 @@ import {
 } from 'material-ui/Table';
 import RaisedButton from 'material-ui/RaisedButton';
 
-const Recipe = (props) => {
-  const {
-    recipe,
-    openDeleteWindow,
-    openEditWindow,
-  } = props;
-
+const Recipe = ({
+  recipe,
+  openDeleteWindow,
+  openEditWindow,
+}) => {
   const styles = {
     subheader: {
       lineHeight: '20px',
