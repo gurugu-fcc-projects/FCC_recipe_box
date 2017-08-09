@@ -7,6 +7,7 @@ import {
   CLOSE_ADD_DIALOG,
   ADD_RECIPE,
   DELETE_RECIPE,
+  UPDATE_RECIPE,
 } from '../constants/ActionTypes';
 
 const init_state = {
@@ -56,6 +57,11 @@ const dialogs = (state = init_state, action) => {
       return {
         ...state,
         deleteDialogIsOpen: false,
+      };
+    case UPDATE_RECIPE:
+      return {
+        ...state,
+        editDialogIsOpen: false,
       };
     default:
       return state;

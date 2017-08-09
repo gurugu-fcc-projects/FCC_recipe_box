@@ -1,13 +1,14 @@
 import {
   OPEN_DELETE_DIALOG,
+  OPEN_EDIT_DIALOG,
   INPUT_RECIPE,
   ADD_RECIPE,
 } from '../constants/ActionTypes';
 
 const init_state = {
+  currentRecipeId: '',
   dialogRecipeName: '',
   dialogIngredients: '',
-  currentRecipe: '',
 };
 
 const inputRecipe = (state = init_state, action) => {
@@ -15,7 +16,13 @@ const inputRecipe = (state = init_state, action) => {
     case OPEN_DELETE_DIALOG:
       return {
         ...state,
-        currentRecipe: action.payload,
+        currentRecipeId: action.payload,
+      };
+    case OPEN_EDIT_DIALOG:
+      return {
+        currentRecipeId: action.payload.id,
+        dialogRecipeName: action.payload.name,
+        dialogIngredients: action.payload.ingredients,
       };
     case INPUT_RECIPE:
       return {

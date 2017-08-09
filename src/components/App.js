@@ -12,6 +12,7 @@ import { openAddDialog } from '../actions';
 import Recipe from './Recipe';
 import AddDialog from './AddDialog';
 import DeleteDialog from './DeleteDialog';
+import EditDialog from './EditDialog';
 
 const App = ({
   recipes,
@@ -35,7 +36,7 @@ const App = ({
       <AppBar
         title="Recipe Box"
         showMenuIconButton={false}
-        style={{backgroundColor: '#F06292'}}
+        style={{backgroundColor: '#303F9F'}}
       />
 
       <Card>{renderedRecipes}</Card>
@@ -49,6 +50,7 @@ const App = ({
 
       <AddDialog />
       <DeleteDialog />
+      <EditDialog />
 
     </div>
   );

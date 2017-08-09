@@ -1,6 +1,7 @@
 import {
   ADD_RECIPE,
   DELETE_RECIPE,
+  UPDATE_RECIPE,
 } from '../constants/ActionTypes';
 
 const initial_state = [
@@ -36,9 +37,26 @@ const recipeList = (state = initial_state, action) => {
       return state.filter((recipe) => {
         return recipe.id !== action.payload;
       });
+    case UPDATE_RECIPE:
+      return state.map((recipe) => {
+        if (recipe.id === action.payload.currentRecipeId) {
+          return {
+            ...recipe,
+            name: action.payload.name,
+            ingredients: action.payload.ingredients,
+          };
+        }
+        return recipe;
+      });
     default:
       return state;
   }
+};
+
+export const getCurrentRecipe = (id, recipes) => {
+  return recipes.filter((recipe) => {
+    return recipe.id === id;
+  })[0];
 };
 
 export default recipeList;

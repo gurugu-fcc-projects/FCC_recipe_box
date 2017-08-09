@@ -56,7 +56,7 @@ const Recipe = ({
         </Table>
         <RaisedButton
           label="Edit"
-          onTouchTap={openEditDialog}
+          onTouchTap={() => openEditDialog(recipe.id)}
           style={styles.raisedButton} />
         <RaisedButton
           label="Delete"

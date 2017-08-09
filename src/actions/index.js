@@ -1,9 +1,10 @@
 import * as types from '../constants/ActionTypes';
+import { getCurrentRecipe } from '../reducers/recipes';
 
-export const openDeleteDialog = (currentRecipe) => {
+export const openDeleteDialog = (currentRecipeId) => {
   return {
     type: types.OPEN_DELETE_DIALOG,
-    payload: currentRecipe,
+    payload: currentRecipeId,
   };
 };
 
@@ -13,10 +14,17 @@ export const closeDeleteDialog = () => {
   };
 };
 
-export const openEditDialog = () => {
-  return {
+export const openEditDialog = (id) => (dispatch, getState) => {
+  const currentRecipe = getCurrentRecipe(id, getState().recipes);
+  console.log(currentRecipe);
+  dispatch({
     type: types.OPEN_EDIT_DIALOG,
-  };
+    payload: {
+      id: id,
+      name: currentRecipe.name,
+      ingredients: currentRecipe.ingredients.join(', '),
+    },
+  });
 };
 
 export const closeEditDialog = () => {
@@ -59,11 +67,24 @@ export const addRecipe = (id, name, ingredients) => {
 };
 
 export const deleteRecipe = () => (dispatch, getState) => {
-  const currentRecipe = getState().input.currentRecipe;
-  console.log('currentRecipe', currentRecipe);
+  const currentRecipeId = getState().input.currentRecipeId;
+
   dispatch({
     type: types.DELETE_RECIPE,
-    payload: currentRecipe,
+    payload: currentRecipeId,
+  });
+};
+
+export const updateRecipe = (name, ingredients) => (dispatch, getState) => {
+  const currentRecipeId = getState().input.currentRecipeId;
+
+  dispatch({
+    type: types.UPDATE_RECIPE,
+    payload: {
+      currentRecipeId,
+      name,
+      ingredients,
+    },
   });
 };
 
