@@ -1,8 +1,9 @@
 import * as types from '../constants/ActionTypes';
 
-export const openDeleteDialog = () => {
+export const openDeleteDialog = (currentRecipe) => {
   return {
     type: types.OPEN_DELETE_DIALOG,
+    payload: currentRecipe,
   };
 };
 
@@ -57,11 +58,13 @@ export const addRecipe = (id, name, ingredients) => {
   };
 };
 
-export const deleteRecipe = (id) => {
-  return {
+export const deleteRecipe = () => (dispatch, getState) => {
+  const currentRecipe = getState().input.currentRecipe;
+  console.log('currentRecipe', currentRecipe);
+  dispatch({
     type: types.DELETE_RECIPE,
-    payload: id,
-  };
+    payload: currentRecipe,
+  });
 };
 
 export const showErrorMessage = (field, message) => {

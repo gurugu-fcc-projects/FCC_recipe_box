@@ -61,7 +61,7 @@ const Recipe = ({
         <RaisedButton
           label="Delete"
           secondary={true}
-          onTouchTap={openDeleteDialog}
+          onTouchTap={() => openDeleteDialog(recipe.id)}
           style={styles.raisedButton} />
       </CardText>
     </Card>

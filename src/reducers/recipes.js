@@ -1,5 +1,6 @@
 import {
   ADD_RECIPE,
+  DELETE_RECIPE,
 } from '../constants/ActionTypes';
 
 const initial_state = [
@@ -31,6 +32,10 @@ const recipeList = (state = initial_state, action) => {
           ingredients: action.payload.ingredients,
         }
       ];
+    case DELETE_RECIPE:
+      return state.filter((recipe) => {
+        return recipe.id !== action.payload;
+      });
     default:
       return state;
   }

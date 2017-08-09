@@ -5,11 +5,15 @@ import { connect } from 'react-redux';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
-import { closeDeleteDialog } from '../actions';
+import {
+  closeDeleteDialog,
+  deleteRecipe,
+} from '../actions';
 
 const DeleteDialog = ({
   deleteDialogIsOpen,
   closeDeleteDialog,
+  deleteRecipe,
 }) => {
   const deleteDialogActions = [
     <FlatButton
@@ -21,7 +25,7 @@ const DeleteDialog = ({
       label="Delete"
       secondary={true}
       keyboardFocused={true}
-      onTouchTap={closeDeleteDialog}
+      onTouchTap={deleteRecipe}
     />,
   ];
 
@@ -40,10 +44,14 @@ const DeleteDialog = ({
 DeleteDialog.propTypes = {
   deleteDialogIsOpen: PropTypes.bool,
   closeDeleteDialog: PropTypes.func,
+  deleteRecipe: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
   deleteDialogIsOpen: state.dialogs.deleteDialogIsOpen,
 });
 
-export default connect(mapStateToProps, { closeDeleteDialog })(DeleteDialog);
+export default connect(mapStateToProps, {
+  closeDeleteDialog,
+  deleteRecipe,
+})(DeleteDialog);

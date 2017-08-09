@@ -1,4 +1,5 @@
 import {
+  OPEN_DELETE_DIALOG,
   INPUT_RECIPE,
   ADD_RECIPE,
 } from '../constants/ActionTypes';
@@ -6,10 +7,16 @@ import {
 const init_state = {
   dialogRecipeName: '',
   dialogIngredients: '',
+  currentRecipe: '',
 };
 
 const inputRecipe = (state = init_state, action) => {
   switch(action.type) {
+    case OPEN_DELETE_DIALOG:
+      return {
+        ...state,
+        currentRecipe: action.payload,
+      };
     case INPUT_RECIPE:
       return {
         ...state,
