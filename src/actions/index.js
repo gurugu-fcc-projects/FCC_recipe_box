@@ -55,3 +55,19 @@ export const addRecipe = (name, ingredients) => {
     },
   };
 };
+
+export const showErrorMessage = (field, message) => {
+  return {
+    type: types.SHOW_ERROR,
+    payload: {
+      field,
+      message,
+    },
+  };
+};
+
+export const hideErrorMessages = () => {
+  return {
+    type: types.HIDE_ERROR,
+  };
+};

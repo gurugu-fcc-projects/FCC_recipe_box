@@ -1,4 +1,7 @@
-import { INPUT_RECIPE } from '../constants/ActionTypes';
+import {
+  INPUT_RECIPE,
+  ADD_RECIPE,
+} from '../constants/ActionTypes';
 
 const init_state = {
   dialogRecipeName: '',
@@ -12,6 +15,11 @@ const inputRecipe = (state = init_state, action) => {
         ...state,
         [action.payload.field]: action.payload.value,
       };
+    case ADD_RECIPE:
+      return {
+        dialogRecipeName: '',
+        dialogIngredients: '',
+      }
     default:
       return state;
   }

@@ -6,27 +6,49 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 
-import { closeAddDialog, inputRecipe, addRecipe } from '../actions';
+import {
+  closeAddDialog,
+  inputRecipe,
+  addRecipe,
+  showErrorMessage,
+  hideErrorMessages,
+} from '../actions';
 
 const AddDialog = ({
   addDialogIsOpen,
   dialogRecipeName,
   dialogIngredients,
+  inputNameError,
+  inputIngredientsError,
   closeAddDialog,
   inputRecipe,
   addRecipe,
+  showErrorMessage,
+  hideErrorMessages,
 }) => {
   const handleInput = (event) => {
     inputRecipe(event.target.value, event.target.id);
   };
 
   const handleAdd = () => {
-    const ingredients = (dialogIngredients.split(',')).map(ingredient => {
-      return ingredient.trim();
-    });
-    // const readyIngredients = ingredientsArray
-    console.log(ingredients);
-    addRecipe(dialogRecipeName, ingredients);
+    if (dialogRecipeName && dialogIngredients) {
+      const ingredients = (dialogIngredients.split(',')).map(ingredient => {
+        return ingredient.trim();
+      });
+
+      addRecipe(dialogRecipeName, ingredients);
+    }
+
+    if (!dialogRecipeName) {
+      showErrorMessage('inputNameError', 'This is a required field');
+    }
+    if (!inputIngredientsError) {
+      showErrorMessage('inputIngredientsError', 'This is a required field');
+    }
+
+    window.setTimeout(() => {
+      hideErrorMessages();
+    }, 3000);
   };
 
   const addDialogActions = [
@@ -42,9 +64,6 @@ const AddDialog = ({
       onTouchTap={handleAdd}
     />,
   ];
-
-  const inputNameError = dialogRecipeName ? '' : 'This field is required';
-  const inputIngredientsError = dialogIngredients ? '' : 'This field is required';
 
   return (
     <Dialog
@@ -82,18 +101,26 @@ AddDialog.propTypes = {
   addDialogIsOpen: PropTypes.bool,
   dialogRecipeName: PropTypes.string,
   dialogIngredients: PropTypes.string,
+  inputNameError: PropTypes.string,
+  inputIngredientsError: PropTypes.string,
   closeAddDialog: PropTypes.func,
   inputRecipe: PropTypes.func,
+  showErrorMessage: PropTypes.func,
+  hideErrorMessages: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
   addDialogIsOpen: state.dialogs.addDialogIsOpen,
   dialogRecipeName: state.input.dialogRecipeName,
   dialogIngredients: state.input.dialogIngredients,
+  inputNameError: state.errors.inputNameError,
+  inputIngredientsError: state.errors.inputIngredientsError,
 });
 
 export default connect(mapStateToProps, {
   closeAddDialog,
   inputRecipe,
-  addRecipe
+  addRecipe,
+  showErrorMessage,
+  hideErrorMessages,
 })(AddDialog);
