@@ -7,6 +7,7 @@ export const CLOSE_ADD_DIALOG = 'CLOSE_ADD_DIALOG';
 
 export const INPUT_RECIPE = 'INPUT_RECIPE';
 export const ADD_RECIPE = 'ADD_RECIPE';
+export const DELETE_RECIPE = 'DELETE_RECIPE';
 
 export const SHOW_ERROR = 'SHOW_ERROR';
 export const HIDE_ERROR = 'HIDE_ERROR';

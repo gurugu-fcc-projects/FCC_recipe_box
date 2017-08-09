@@ -17,8 +17,8 @@ const App = ({
   recipes,
   openAddDialog
 }) => {
-  const renderedRecipes = recipes.map((recipe, index) =>
-    <Recipe key={index} recipe={recipe} />
+  const renderedRecipes = recipes.map((recipe) =>
+    <Recipe key={recipe.id} recipe={recipe} />
   );
 
   const styles = {

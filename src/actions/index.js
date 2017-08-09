@@ -46,13 +46,21 @@ export const inputRecipe = (name, id) => {
   };
 };
 
-export const addRecipe = (name, ingredients) => {
+export const addRecipe = (id, name, ingredients) => {
   return {
     type: types.ADD_RECIPE,
     payload: {
+      id,
       name,
       ingredients,
     },
+  };
+};
+
+export const deleteRecipe = (id) => {
+  return {
+    type: types.DELETE_RECIPE,
+    payload: id,
   };
 };
 

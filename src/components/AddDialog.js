@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import uuidv4 from 'uuid/v4';
 
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
@@ -36,19 +37,19 @@ const AddDialog = ({
         return ingredient.trim();
       });
 
-      addRecipe(dialogRecipeName, ingredients);
+      addRecipe(uuidv4(), dialogRecipeName, ingredients);
+    } else {
+      if (!dialogRecipeName) {
+        showErrorMessage('inputNameError', 'This is a required field');
+      }
+      if (!inputIngredientsError) {
+        showErrorMessage('inputIngredientsError', 'This is a required field');
+      }
+  
+      window.setTimeout(() => {
+        hideErrorMessages();
+      }, 3000);
     }
-
-    if (!dialogRecipeName) {
-      showErrorMessage('inputNameError', 'This is a required field');
-    }
-    if (!inputIngredientsError) {
-      showErrorMessage('inputIngredientsError', 'This is a required field');
-    }
-
-    window.setTimeout(() => {
-      hideErrorMessages();
-    }, 3000);
   };
 
   const addDialogActions = [
