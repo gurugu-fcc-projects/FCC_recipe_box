@@ -23,11 +23,17 @@ const App = ({
   );
 
   const styles = {
+    appBar: {
+      backgroundColor: '#303F9F',
+    },
+    title: {
+      fontSize: '1em',
+    },
     addButton: {
       position: 'absolute',
       bottom: 10,
       right: 10,
-    },
+    }
   };
 
   return (
@@ -36,7 +42,8 @@ const App = ({
       <AppBar
         title="Recipe Box"
         showMenuIconButton={false}
-        style={{backgroundColor: '#303F9F'}}
+        style={styles.appBar}
+        titleStyle={styles.title}
       />
 
       <Card>{renderedRecipes}</Card>

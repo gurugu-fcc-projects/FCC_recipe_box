@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import App from './components/App';
 import './styles/index.css';
@@ -14,8 +15,14 @@ injectTapEventPlugin();
 
 const store = configureStore();
 
+const muiTheme = getMuiTheme({
+  appBar: {
+    height: 30,
+  },
+});
+
 const Root = () => (
-  <MuiThemeProvider>
+  <MuiThemeProvider muiTheme={muiTheme}>
     <App />
   </MuiThemeProvider>
 );

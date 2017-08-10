@@ -1,6 +1,7 @@
 {
   "name": "FCC_recipe_box",
   "version": "0.1.0",
+  "homepage": "https://GuRuGuMaWaRu.github.io/FCC_recipe_box",
   "private": true,
   "devDependencies": {
     "react-scripts": "1.0.10"
