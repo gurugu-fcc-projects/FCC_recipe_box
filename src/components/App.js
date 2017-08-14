@@ -7,7 +7,7 @@ import { Card } from 'material-ui/Card';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
-import '../styles/App.css';
+import '../styles/App.scss';
 import { openAddDialog } from '../actions';
 import Recipe from './Recipe';
 import AddDialog from './AddDialog';

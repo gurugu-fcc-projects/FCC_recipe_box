@@ -45,7 +45,7 @@ const AddDialog = ({
       if (!inputIngredientsError) {
         showErrorMessage('inputIngredientsError', 'This is a required field');
       }
-  
+
       window.setTimeout(() => {
         hideErrorMessages();
       }, 3000);
@@ -65,6 +65,16 @@ const AddDialog = ({
       onTouchTap={handleAdd}
     />,
   ];
+  const mobile = window.innerWidth > 760 ? false : true;
+  const style = {
+    dialogTitle: {
+      padding: '6px 24px'
+    },
+    dialogBody: {
+      padding: '0 24px 0 24px',
+      border: 'none',
+    },
+  };
 
   return (
     <Dialog
@@ -72,7 +82,11 @@ const AddDialog = ({
       actions={addDialogActions}
       modal={false}
       open={addDialogIsOpen}
-      onRequestClose={closeAddDialog}>
+      autoDetectWindowHeight={false}
+      autoScrollBodyContent={true}
+      onRequestClose={closeAddDialog}
+      titleStyle={mobile ? style.dialogTitle : {}}
+      bodyStyle={mobile ? style.dialogBody: {}} >
       <TextField
         id="dialogRecipeName"
         hintText="Enter a recipe name here"

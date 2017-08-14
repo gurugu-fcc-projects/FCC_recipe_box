@@ -64,6 +64,16 @@ const EditDialog = ({
       onTouchTap={handleConfirm}
     />,
   ];
+  const mobile = window.innerWidth > 760 ? false : true;
+  const style = {
+    dialogTitle: {
+      padding: '6px 24px'
+    },
+    dialogBody: {
+      padding: '0 24px 0 24px',
+      border: 'none',
+    },
+  };
 
   return (
     <Dialog
@@ -71,7 +81,11 @@ const EditDialog = ({
       actions={editDialogActions}
       modal={false}
       open={editDialogIsOpen}
-      onRequestClose={closeEditDialog}>
+      autoDetectWindowHeight={false}
+      autoScrollBodyContent={true}
+      onRequestClose={closeEditDialog}
+      titleStyle={mobile ? style.dialogTitle : {}}
+      bodyStyle={mobile ? style.dialogBody: {}} >
       <TextField
         id="dialogRecipeName"
         hintText="Enter a recipe name here"

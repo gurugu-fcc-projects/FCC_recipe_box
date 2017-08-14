@@ -28,6 +28,16 @@ const DeleteDialog = ({
       onTouchTap={deleteRecipe}
     />,
   ];
+  const mobile = window.innerWidth > 760 ? false : true;
+  const style = {
+    dialogTitle: {
+      padding: '6px 24px'
+    },
+    dialogBody: {
+      padding: '0 24px 0 24px',
+      border: 'none',
+    },
+  };
 
   return (
     <Dialog
@@ -35,7 +45,9 @@ const DeleteDialog = ({
       actions={deleteDialogActions}
       modal={false}
       open={deleteDialogIsOpen}
-      onRequestClose={closeDeleteDialog}>
+      onRequestClose={closeDeleteDialog}
+      titleStyle={mobile ? style.dialogTitle : {}}
+      bodyStyle={mobile ? style.dialogBody: {}} >
       Are you sure you want to delete this recipe?
     </Dialog>
   );
