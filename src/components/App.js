@@ -36,9 +36,12 @@ const App = ({
       lineHeight: '40px',
     },
     addButton: {
-      position: 'absolute',
+      position: 'fixed',
+      top: 'auto',
+      left: 'auto',
       bottom: 10,
       right: 10,
+      margin: 0,
     }
   };
 
