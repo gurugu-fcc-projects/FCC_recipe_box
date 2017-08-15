@@ -15,6 +15,8 @@ injectTapEventPlugin();
 
 const store = configureStore();
 
+const mobile = window.innerWidth > 760 ? false : true;
+
 const muiTheme = getMuiTheme({
   appBar: {
     height: 30,
@@ -22,7 +24,8 @@ const muiTheme = getMuiTheme({
 });
 
 const Root = () => (
-  <MuiThemeProvider muiTheme={muiTheme}>
+  // <MuiThemeProvider muiTheme={muiTheme}>
+  <MuiThemeProvider>
     <App />
   </MuiThemeProvider>
 );

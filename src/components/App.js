@@ -21,13 +21,19 @@ const App = ({
   const renderedRecipes = recipes.map((recipe) =>
     <Recipe key={recipe.id} recipe={recipe} />
   );
-
+  const mobile = window.innerWidth > 760 ? false : true;
   const styles = {
     appBar: {
       backgroundColor: '#303F9F',
     },
+    appBarMobile: {
+      backgroundColor: '#303F9F',
+      height: '40px',
+    },
     title: {
+      height: '40px',
       fontSize: '1em',
+      lineHeight: '40px',
     },
     addButton: {
       position: 'absolute',
@@ -42,8 +48,8 @@ const App = ({
       <AppBar
         title="Recipe Box"
         showMenuIconButton={false}
-        style={styles.appBar}
-        titleStyle={styles.title}
+        style={mobile ? styles.appBarMobile : styles.appBar}
+        titleStyle={mobile ? styles.title : {}}
       />
 
       <Card>{renderedRecipes}</Card>
