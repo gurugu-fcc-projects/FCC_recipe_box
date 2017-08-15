@@ -5,6 +5,8 @@ import {
   CLOSE_EDIT_DIALOG,
   OPEN_ADD_DIALOG,
   CLOSE_ADD_DIALOG,
+  OPEN_INFO_DIALOG,
+  CLOSE_INFO_DIALOG,
   ADD_RECIPE,
   DELETE_RECIPE,
   UPDATE_RECIPE,
@@ -14,6 +16,7 @@ const init_state = {
   deleteDialogIsOpen: false,
   editDialogIsOpen: false,
   addDialogIsOpen: false,
+  infoDialogIsOpen: false,
 };
 
 const dialogs = (state = init_state, action) => {
@@ -47,6 +50,16 @@ const dialogs = (state = init_state, action) => {
       return {
         ...state,
         addDialogIsOpen: false,
+      };
+    case OPEN_INFO_DIALOG:
+      return {
+        ...state,
+        infoDialogIsOpen: true,
+      };
+    case CLOSE_INFO_DIALOG:
+      return {
+        ...state,
+        infoDialogIsOpen: false,
       };
     case ADD_RECIPE:
       return {

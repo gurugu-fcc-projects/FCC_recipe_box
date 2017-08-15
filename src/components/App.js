@@ -6,17 +6,21 @@ import AppBar from 'material-ui/AppBar';
 import { Card } from 'material-ui/Card';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import ActionInfoOutline from 'material-ui/svg-icons/action/info-outline';
 
 import '../styles/App.scss';
-import { openAddDialog } from '../actions';
+import { openAddDialog, openInfoDialog } from '../actions';
 import Recipe from './Recipe';
 import AddDialog from './AddDialog';
 import DeleteDialog from './DeleteDialog';
 import EditDialog from './EditDialog';
+import InfoDialog from './InfoDialog';
 
 const App = ({
   recipes,
-  openAddDialog
+  infoDialogIsOpen,
+  openAddDialog,
+  openInfoDialog,
 }) => {
   const renderedRecipes = recipes.map((recipe) =>
     <Recipe key={recipe.id} recipe={recipe} />
@@ -30,10 +34,20 @@ const App = ({
       backgroundColor: '#303F9F',
       height: '40px',
     },
-    title: {
+    titleMobile: {
       height: '40px',
       fontSize: '1em',
       lineHeight: '40px',
+    },
+    appBarIcon: {
+      color: '#fff',
+      height: '44px',
+      width: '44px',
+    },
+    appBarIconMobile: {
+      color: '#fff',
+      height: '24px',
+      width: '24px',
     },
     addButton: {
       position: 'fixed',
@@ -42,8 +56,9 @@ const App = ({
       bottom: 10,
       right: 10,
       margin: 0,
-    }
+    },
   };
+  const infoIcon = <ActionInfoOutline style={mobile ? styles.appBarIconMobile : styles.appBarIcon} />;
 
   return (
     <div className="App">
@@ -51,8 +66,10 @@ const App = ({
       <AppBar
         title="Recipe Box"
         showMenuIconButton={false}
+        iconElementRight={infoIcon}
+        onRightIconButtonTouchTap={openInfoDialog}
         style={mobile ? styles.appBarMobile : styles.appBar}
-        titleStyle={mobile ? styles.title : {}}
+        titleStyle={mobile ? styles.titleMobile : {}}
       />
 
       <Card>{renderedRecipes}</Card>
@@ -67,6 +84,7 @@ const App = ({
       <AddDialog />
       <DeleteDialog />
       <EditDialog />
+      <InfoDialog />
 
     </div>
   );
@@ -74,11 +92,14 @@ const App = ({
 
 App.propTypes = {
   recipes: PropTypes.array.isRequired,
+  infoDialogIsOpen: PropTypes.bool,
   openAddDialog: PropTypes.func,
+  openInfoDialog: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
   recipes: state.recipes,
+  infoDialogIsOpen: state.dialogs.infoDialogIsOpen,
 });
 
-export default connect(mapStateToProps, { openAddDialog })(App);
+export default connect(mapStateToProps, { openAddDialog, openInfoDialog })(App);

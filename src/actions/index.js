@@ -45,6 +45,18 @@ export const closeAddDialog = () => {
   };
 };
 
+export const openInfoDialog = () => {
+  return {
+    type: types.OPEN_INFO_DIALOG,
+  };
+};
+
+export const closeInfoDialog = () => {
+  return {
+    type: types.CLOSE_INFO_DIALOG,
+  };
+};
+
 export const inputRecipe = (name, id) => {
   return {
     type: types.INPUT_RECIPE,
