@@ -3,6 +3,7 @@ import {
   OPEN_EDIT_DIALOG,
   INPUT_RECIPE,
   ADD_RECIPE,
+  UPDATE_RECIPE,
 } from '../constants/ActionTypes';
 
 const init_state = {
@@ -30,6 +31,7 @@ const inputRecipe = (state = init_state, action) => {
         [action.payload.field]: action.payload.value,
       };
     case ADD_RECIPE:
+    case UPDATE_RECIPE:
       return {
         dialogRecipeName: '',
         dialogIngredients: '',

@@ -16,7 +16,7 @@ export const closeDeleteDialog = () => {
 
 export const openEditDialog = (id) => (dispatch, getState) => {
   const currentRecipe = getCurrentRecipe(id, getState().recipes);
-  console.log(currentRecipe);
+
   dispatch({
     type: types.OPEN_EDIT_DIALOG,
     payload: {
