@@ -4,7 +4,7 @@
   "homepage": "https://GuRuGuMaWaRu.github.io/FCC_recipe_box",
   "private": true,
   "devDependencies": {
-    "react-scripts": "1.0.10"
+    "react-scripts": "5.0.1"
   },
   "dependencies": {
     "material-ui": "^0.18.7",
